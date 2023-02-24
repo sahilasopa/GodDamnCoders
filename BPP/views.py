@@ -1,6 +1,7 @@
 import json
 
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 url = "https://dsep-protocol-client.becknprotocol.io/search"
 payload = json.dumps({
@@ -45,6 +46,7 @@ headers = {
 }
 
 
+@csrf_exempt
 def Home(request):
     if request.method == "POST":
         print("=================== BODY ==========================")
