@@ -48,6 +48,7 @@ headers = {
 
 @csrf_exempt
 def Home(request):
+    print(request.method)
     if request.method == "POST":
         print("Yes someone posted something")
         print("=================== BODY ==========================")
