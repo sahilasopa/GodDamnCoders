@@ -50,7 +50,7 @@ headers = {
 def Home(request):
     print(request.method)
     if request.method == "POST":
-        data = json.dumps(request.body)
+        data = json.dumps(str(request.body))
         print("Yes someone posted something")
         print("=================== BODY ==========================")
         print(data)
