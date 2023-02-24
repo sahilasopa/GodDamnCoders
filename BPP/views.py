@@ -1,5 +1,6 @@
 import json
 
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 url = "https://dsep-protocol-client.becknprotocol.io/search"
@@ -346,5 +347,5 @@ def Home(request):
         print("=================== BODY ==========================")
         print(data)
         print("=================== BODY ==========================")
-        return x
-    return x
+        return JsonResponse(x, safe=False)
+    return JsonResponse(data=x, safe=False)
