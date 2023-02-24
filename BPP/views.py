@@ -20,7 +20,7 @@ payload = json.dumps({
         "intent": {
             "item": {
                 "descriptor": {
-                    "name": "Test"
+                    "name": "Sahil Asopa"
                 },
                 "tags": [
                     {
