@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create job bpp</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css'>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+</head>
+<body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=">
+    <title>Job Board</title>
+</head>
+<body class="bg-gray-400">
+<header class="header">
+    <nav class="flex items-center justify-between flex-wrap px-6" style="height: 65px;">
+        <div class="flex items-center flex-shrink-0 text-black mr-6">
+            <span class="font-semibold text-xl tracking-tight">Create Job/Internship App</span>
+        </div>
+
+        <div class="flex items-center h-full">
+            <div class="dropdown relative flex items-center h-full hover:bg-gray-500 px-2 transition">
+                <button class="inline-flex items-center h-full">
+                    <span class="mr-1">User</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                    </svg>
+                </button>
+
+                <ul class="dropdown-menu absolute bg-white shadow hidden w-32">
+                    <li><a href="#" class="py-1 px-4 block hover:bg-gray-200 whitespace-no-wrap">Log out</a></li>
+                </ul>
+
+
+            </div>
+        </div>
+        </div>
+    </nav>
+</header>
+
+<main class="main bg-white px-6 md:px-16 py-6">
+    <div class="w-full max-w-xl mx-auto">
+        <form method="post">
+            {% csrf_token %}
+            <h1 class="text-2xl mb-2">Post new job</h1>
+
+            <div class="job-info border-b-2 py-2 mb-5">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm mb-2" for="job-title">Title</label>
+                    <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                           type="text" id="job-title" name="job-title" placeholder="Java Developer" autofocus required>
+                </div>
+
+                <div class="md:flex md:justify-between">
+                    <div class="w-full md:w-5/12 mb-4 md:mb-0">
+                        <label class="block text-gray-700 text-sm mb-2" for="job-type">
+                            Job Type
+                        </label>
+                        <div class="relative">
+                            <select class="block appearance-none w-full bg-white border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500"
+                                    id="job-type" name="job-type">
+                                <option>Full-time</option>
+                                <option>Part-time</option>
+                                <option>Freelance</option>
+                                <option>Contract</option>
+                            </select>
+
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-6/12 mb-4 md:mb-0">
+                        <label class="block text-gray-700 text-sm mb-2" for="skills">
+                            Skills
+                        </label>
+                        <div class="relative">
+                            <select class="selectpicker block appearance-none w-full bg-white border border-gray-400 text-gray-700 py-2 px-4 pr-1 rounded leading-tight focus:outline-none focus:border-gray-100"
+                                    multiple data-live-search="true" name="skills" id="skills" required>
+                                <option>Java</option>
+                                <option>Python</option>
+                                <option>React</option>
+                                <option>Artificial Intelligence</option>
+                                <option>Data Analytics</option>
+                                <option>UI/UX Design</option>
+                                <option>Cloud expert</option>
+                                <option>System Architect</option>
+                                <option>Backend Developer</option>
+                                <option>Frontend Developer</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full mb-4 md:mb-0">
+                    <label for="location" class="block text-gray-700 text-sm mb-2">Location</label>
+                    <input type="text"
+                           class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                           id="location" name="location" placeholder="Somewhere" required>
+
+                    <div>
+                        <label class="text-gray-600 flex items-center" for="remote">
+                            <input class="mr-2 leading-tight" type="checkbox" id="remote" name="remote">
+                            <span class="text-sm">Work can be done remotely</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label for="description" class="block text-gray-700 text-sm mb-2">Description</label>
+                    <textarea name="description" id="description" cols="" rows=""></textarea>
+                </div>
+
+                <div class="flex flex-wrap -mx-3">
+                    <div class="w-full px-3 mb-4 md:mb-0">
+                        <label for="company" class="block text-gray-700 text-sm mb-2">Company Website</label>
+                        <input type="text"
+                               class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                               id="company" name="website" placeholder="https://www.somecompany.com/" required>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input class="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded" type="submit"
+                       value="Create Job"/>
+                <button class="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded">Cancel</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer class="footer py-4">
+    <p class="text-center text-gray-600 text-xs">
+
+    </p>
+</footer>
+</body>
+</html>
+
+<script src='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js'></script>
+<script src="{% static 'script.js' %}"></script>
+
+</body>
+</html>

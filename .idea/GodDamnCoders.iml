@@ -18,6 +18,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="axios" level="application" />
+    <orderEntry type="library" name="4ecc3dbb0b" level="application" />
+    <orderEntry type="library" name="tailwindcss" level="application" />
+    <orderEntry type="library" name="simplemde" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

@@ -149,7 +149,7 @@ x = {
 
 
 @csrf_exempt
-def Home(request):
+def home(request):
     print(request.method)
     if request.method == "POST":
         data = json.dumps(str(request.body))

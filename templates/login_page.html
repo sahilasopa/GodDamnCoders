@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" Content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- Coding starts from here -->
+    <Title> Login Page </Title>
+</head>
+<body>
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>BPP Application Login Page</h2>
+        <p>Please regsiter if you are new to the platform</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" id="username" name="username"
+                           placeholder="Enter Your Username"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Enter Password" required>
+                </div>
+                <button type="submit" id="submit_button_login" class="btn btn-black"><span
+                        class="spinner-border spinner-border-sm" id="spinnerlogin" role="status" aria-hidden="true"
+                        hidden></span><span>Login</span></button>
+                <a href="{% url 'register' %}">
+                    <button type="button" id="submit_button_register" class="btn btn-black"><span
+                            class="spinner-border spinner-border-sm" id="spinnerreg" role="status" aria-hidden="true"
+                            hidden></span><span>Register</span></button>
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- Css coding starts here -->
+<style type="text/css">
+
+    /* Navigation */
+    body {
+
+        font-family: "Lato", sans-serif;
+    }
+
+    .main-head {
+
+        height: 150px;
+        background: #FFF;
+    }
+
+    .sidenav {
+
+        height: 100%;
+        background-color: #000;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    @media screen and (max-height: 450px) {
+
+        .sidenav {
+            padding-top: 15px;
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+
+        .login-form {
+            margin-top: 10%;
+        }
+
+        .register-form {
+
+            margin-top: 10%;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+
+        .main {
+
+            margin-left: 40%;
+        }
+
+        .sidenav {
+
+            width: 40%;
+
+            position: fixed;
+
+            z-index: 1;
+
+            top: 0;
+
+            left: 0;
+        }
+
+        .login-form {
+
+            margin-top: 35%;
+            margin-left: 300px;
+        }
+
+        .form-group input {
+
+            padding: 10px;
+            width: 300px;
+            margin: 5px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-form {
+            margin-top: 20%;
+        }
+    }
+
+    .login-main-text {
+        margin-top: 20%;
+        padding: 60px;
+        color: #fff;
+    }
+
+    .login-main-text h2 {
+
+        font-weight: 300;
+    }
+
+    .btn-black {
+
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .btn-black:hover {
+
+        color: black !important;
+        background-color: white;
+    }
+</style>
+ 
