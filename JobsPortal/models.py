@@ -28,4 +28,4 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         self.company_name = self.user.company_name
-        super(self).save(args, kwargs)
+        super(Post, self).save(*args, **kwargs)

@@ -5,5 +5,5 @@ from JobsPortal import views as jobs
 
 urlpatterns = [
     path('', bpp.home),
-    path('search', bpp.home),
+    path('search', bpp.search),
 ]

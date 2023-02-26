@@ -1,161 +1,95 @@
 import json
 
-from django.http import JsonResponse
+import requests
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-x = {
-    "responses": [
-        {
-            "context": {
-                "domain": "dsep:jobs",
-                "location": {
-                    "country": {
-                        "name": "India",
-                        "code": "IND"
-                    }
-                },
-                "action": "on_search",
-                "version": "1.0.0",
-                "bap_id": "dsep-protocol.becknprotocol.io",
-                "bap_uri": "https://dsep-protocol-network.becknprotocol.io/",
-                "bpp_id": "affinidi.com.bpp",
-                "bpp_uri": "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep",
-                "transaction_id": "a9aaecca-10b7-4d19-b640-b047a7c62195",
-                "message_id": "672f774c-4281-44dd-b1c2-84222a3d771e",
-                "timestamp": "2023-02-22T11:45:10.1712958+00:00",
-                "ttl": "P1M"
-            },
-            "message": {
-                "catalog": {
-                    "descriptor": {
-                        "name": "Affindi Jobs"
-                    },
-                    "payments": [],
-                    "providers": [
-                        {
-                            "id": "1",
-                            "descriptor": {
-                                "name": "Affinidi"
-                            },
-                            "locations": [
-                                {
-                                    "id": "1",
-                                    "city": {
-                                        "name": "Bangalore"
-                                    },
-                                    "state": {
-                                        "name": ""
-                                    },
-                                    "country": {
-                                        "name": ""
-                                    }
-                                },
-                                {
-                                    "id": "2",
-                                    "city": {
-                                        "name": "Bangalore"
-                                    },
-                                    "state": {
-                                        "name": ""
-                                    },
-                                    "country": {
-                                        "name": ""
-                                    }
-                                }
-                            ],
-                            "items": [
-                                {
-                                    "id": "D7F8606A370DA9966DF15E62A81C374B",
-                                    "descriptor": {
-                                        "name": "Database Engineer",
-                                        "long_desc": "We’re on a search for a Staff Mobile Developer with the following attributes: Critical Thinking- You are able to skillfully conceptualise, apply, analyse and evaluate information gathered from observation, experience or communication and use it as a guide to action Data-Driven attitude — You often propose solutions or make a point in a logical and objective manner, substantiated with accurate data and evidence Dealing with Ambiguity — You can effectively cope with change and uncertainty, and are comfortable when things are up in the air Goal-oriented — You are driven and can be counted on to exceed goals. You steadfastly push yourself and others to achieve results all the time Problem Solving — You can easily identify and solve complex problems in a methodological manner "
-                                    },
-                                    "location_ids": [
-                                        "1"
-                                    ]
-                                },
-                                {
-                                    "id": "0253719F295521CED39EC9C2F3C8DCDE",
-                                    "descriptor": {
-                                        "name": "Fullstack Engineer",
-                                        "long_desc": "We’re on a search for a Staff Mobile Developer with the following attributes: Critical Thinking- You are able to skillfully conceptualise, apply, analyse and evaluate information gathered from observation, experience or communication and use it as a guide to action Data-Driven attitude — You often propose solutions or make a point in a logical and objective manner, substantiated with accurate data and evidence Dealing with Ambiguity — You can effectively cope with change and uncertainty, and are comfortable when things are up in the air Goal-oriented — You are driven and can be counted on to exceed goals. You steadfastly push yourself and others to achieve results all the time Problem Solving — You can easily identify and solve complex problems in a methodological manner "
-                                    },
-                                    "location_ids": [
-                                        "2"
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "id": "1",
-                            "descriptor": {
-                                "name": "Affinidi"
-                            },
-                            "locations": [
-                                {
-                                    "id": "1",
-                                    "city": {
-                                        "name": "Bangalore"
-                                    },
-                                    "state": {
-                                        "name": ""
-                                    },
-                                    "country": {
-                                        "name": ""
-                                    }
-                                },
-                                {
-                                    "id": "2",
-                                    "city": {
-                                        "name": "Bangalore"
-                                    },
-                                    "state": {
-                                        "name": ""
-                                    },
-                                    "country": {
-                                        "name": ""
-                                    }
-                                }
-                            ],
-                            "items": [
-                                {
-                                    "id": "D7F8606A370DA9966DF15E62A81C374B",
-                                    "descriptor": {
-                                        "name": "Database Engineer",
-                                        "long_desc": "We’re on a search for a Staff Mobile Developer with the following attributes: Critical Thinking- You are able to skillfully conceptualise, apply, analyse and evaluate information gathered from observation, experience or communication and use it as a guide to action Data-Driven attitude — You often propose solutions or make a point in a logical and objective manner, substantiated with accurate data and evidence Dealing with Ambiguity — You can effectively cope with change and uncertainty, and are comfortable when things are up in the air Goal-oriented — You are driven and can be counted on to exceed goals. You steadfastly push yourself and others to achieve results all the time Problem Solving — You can easily identify and solve complex problems in a methodological manner "
-                                    },
-                                    "location_ids": [
-                                        "1"
-                                    ]
-                                },
-                                {
-                                    "id": "0253719F295521CED39EC9C2F3C8DCDE",
-                                    "descriptor": {
-                                        "name": "Fullstack Engineer",
-                                        "long_desc": "We’re on a search for a Staff Mobile Developer with the following attributes: Critical Thinking- You are able to skillfully conceptualise, apply, analyse and evaluate information gathered from observation, experience or communication and use it as a guide to action Data-Driven attitude — You often propose solutions or make a point in a logical and objective manner, substantiated with accurate data and evidence Dealing with Ambiguity — You can effectively cope with change and uncertainty, and are comfortable when things are up in the air Goal-oriented — You are driven and can be counted on to exceed goals. You steadfastly push yourself and others to achieve results all the time Problem Solving — You can easily identify and solve complex problems in a methodological manner "
-                                    },
-                                    "location_ids": [
-                                        "2"
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
+from JobsPortal.models import Post
+
+success = {
+    "message": {
+        "ack": {
+            "status": "ACK"
         }
-    ]
+    }
 }
+
+failure = {
+    "message": {
+        "ack": {
+            "status": "NACK"
+        }
+    }
+}
+
+success_response = json.dumps(success)
+failed_response = json.dumps(failure)
 
 
 @csrf_exempt
-def home(request):
-    print(request.method)
+def search(request):
+    message = {}
+    items = []
+    # TODO: CHECK FOR EDGE CASES
     if request.method == "POST":
-        data = json.dumps(str(request.body))
-        print("Yes someone posted something")
-        print("=================== BODY ==========================")
-        print(data)
-        print("=================== BODY ==========================")
-        return JsonResponse(x, safe=False)
-    return JsonResponse(data=x, safe=False)
+        data = json.loads(request.body)
+        bap_url, bap_id = data.get("context").get("bap_uri"), data.get("context").get("bap_id")
+        if bap_url is None or bap_id is None:
+            return HttpResponse(failed_response, content_type="application/json")
+        bap_url += "on_search"
+        tags = data.get("message").get("intent").get("item").get("tags")[0].get("list")
+        if tags is not None:
+            for i in tags:
+                tag = i.get("descriptor").get("code")
+                try:
+                    posts = Post.objects.filter(skills__contains=tag)
+                    for post in posts:
+                        if post is not None:
+                            context = data.get("context")
+                            context["bpp_id"] = "goddamncoders.pythonanywhere.com/apis/v1"
+                            context["bpp_uri"] = "https://c104-103-195-249-148.in.ngrok.io/apis/v1"
+                            context["action"] = "on_search"
+                            message["context"] = (context)
+                            items.append(
+                                {
+                                    "id": str(post.id),
+                                    "descriptor": {
+                                        "name": post.company_name
+                                    },
+                                    "locations": [
+                                        {
+                                            "id": "1",
+                                            "city": {
+                                                "name": post.location
+                                            },
+                                        },
+                                    ],
+                                    "items": [
+                                        {
+                                            "id": post.id,
+                                            "descriptor": {
+                                                "name": post.job_title,
+                                                "long_desc": post.description
+                                            },
+                                            "location_ids": [
+                                                "1"
+                                            ]
+                                        },
+                                    ]
+                                }
+                            )
+                except:
+                    pass
+                message["responses"] = items
+                response = json.dumps(message)
+                print(response)
+                print(bap_url)
+                x = requests.post(bap_url, data=response)
+                print(x)
+                print(x.status_code)
+            return HttpResponse(success_response, content_type="application/json")
+    return HttpResponse(data=success_response, content_type="application/json")
+
+
+def home(request):
+    return None

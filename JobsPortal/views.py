@@ -1,8 +1,9 @@
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from JobsPortal.models import BaseUser
+from JobsPortal.models import BaseUser, Post
 
 
 def login(request):
@@ -54,20 +55,17 @@ def register(request):
         return render(request, 'registeration_page.html')
 
 
+@login_required(login_url="/login")
 def create_jobs(request):
     if request.method == "POST":
+        user = BaseUser.objects.get(user_id=request.user.id)
         title = request.POST.get("job-title")
         job_type = request.POST.get("job-type")
         skills = request.POST.getlist("skills")
         location = request.POST.get("location")
-        is_remote = request.POST.get("remote")
+        is_remote = request.POST.get("remote", False)
         description = request.POST.get("description")
         website = request.POST.get("website")
-        print(title)
-        print(job_type)
-        print(skills)
-        print(location)
-        print(is_remote)
-        print(description)
-        print(website)
+        Post.objects.create(job_title=title, user=user, job_type=job_type, skills=skills, location=location,
+                            is_remote=is_remote, description=description, website=website)
     return render(request, "Create_Job_File.html")
